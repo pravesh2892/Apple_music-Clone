@@ -61,7 +61,7 @@ padding: 20px;
 
 /* Styles for the album title */
 .album-title {
-color: rgb(247, 245, 245); 
+color: black; 
 overflow-x: hidden;
 }
 .album-title-custom {
@@ -98,7 +98,7 @@ animation: scrollText 5s linear infinite;
 }
 
 .album-card.custom-card {
-  background-color: gray;
+  background-color: #80808012;
 }
 
 .section-1 {

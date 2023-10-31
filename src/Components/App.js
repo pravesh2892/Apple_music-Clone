@@ -5,7 +5,7 @@ import Navbar from "./Navbar.js";
 import BrowsePage from "./BrowsePage.js";
 import MusicPlayerPage from "./MusicPlayerPage.js";
 import SongList from "./SongList.js";
-import SignIn from "./SignIn.js";
+import SignIn from "./SignIn/SignIn.js";
 import ListenNow from "./ListenNow.js";
 import AlbumGridPage from "./RandomAlbumGrid.js";
 import FavoriteSongsList from "./FavoriteSongsList.js";

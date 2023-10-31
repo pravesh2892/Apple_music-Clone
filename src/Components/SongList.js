@@ -130,7 +130,7 @@ function SongList() {
           display: "flex",
           alignItems: "center",
           marginBottom: "20px",
-          backgroundColor: "#1d1c1c",
+          backgroundColor: "#0000001a",
         }}
       >
         <CardMedia
@@ -141,27 +141,27 @@ function SongList() {
           style={{ objectFit: "contain", maxWidth: "200px" }}
         />
         <CardContent>
-          <Typography variant="h5" gutterBottom style={{ color: "white" }}>
+          <Typography variant="h5" gutterBottom style={{ color: "black" }}>
             {album.title}
           </Typography>
           <Typography
             variant="body2"
             color="textSecondary"
-            style={{ color: "white" }}
+            style={{ color: "black" }}
           >
             Description: {album.description}
           </Typography>
           <Typography
             variant="body2"
             color="textSecondary"
-            style={{ color: "white" }}
+            style={{ color: "black" }}
           >
             Artists: {album.artists.map((artist) => artist.name).join(", ")}
           </Typography>
           <Typography
             variant="body2"
             color="textSecondary"
-            style={{ color: "white" }}
+            style={{ color: "black" }}
           >
             Release Date: {new Date(album.release).toLocaleDateString()}
           </Typography>
@@ -172,14 +172,14 @@ function SongList() {
         Songs in {album.title}
       </Typography>
       {album.songs && album.songs.length > 0 && (
-        <TableContainer component={Card} style={{ backgroundColor: "#1d1c1c" }}>
+        <TableContainer component={Card} style={{ backgroundColor: "#fff" }}>
           <Table className="table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ color: "white" }}>Song</TableCell>
-                <TableCell style={{ color: "white" }}>Artist Names</TableCell>
-                <TableCell style={{ color: "white" }}>Album Name</TableCell>
-                <TableCell style={{ color: "white" }}>Actions</TableCell>
+                <TableCell style={{ color: "black" }}>Song</TableCell>
+                <TableCell style={{ color: "black" }}>Artist Names</TableCell>
+                <TableCell style={{ color: "black" }}>Album Name</TableCell>
+                <TableCell style={{ color: "black" }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -187,7 +187,7 @@ function SongList() {
                 <TableRow
                   key={song._id}
                   style={{
-                    backgroundColor: index % 2 === 0 ? "#1d1c1c" : "#232525",
+                    backgroundColor: index % 2 === 0 ? "#00000033" : "#0000001a",
                   }}
                   className="table-row"
                 >
@@ -202,22 +202,22 @@ function SongList() {
                           marginRight: "10px",
                         }}
                       />
-                      <div style={{ color: "white" }}>{song.title}</div>
+                      <div style={{ color: "black" }}>{song.title}</div>
                     </div>
                   </TableCell>
-                  <TableCell style={{ color: "white" }}>
+                  <TableCell style={{ color: "black" }}>
                     {song.artist
                       .map((artistId) => artistNames[artistId])
                       .join(", ")}
                   </TableCell>
-                  <TableCell style={{ color: "white" }}>
+                  <TableCell style={{ color: "black" }}>
                     {album.title}
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => togglePlay(index)}>
+                    <IconButton onClick={() => togglePlay(index)} style={{ color: "black" }}>
                       {isPlaying[index] ? <Pause /> : <PlayArrow />}
                     </IconButton>
-                    <IconButton onClick={() => toggleFavorite(song)}>
+                    <IconButton onClick={() => toggleFavorite(song)} style={{ color: "red" }}>
                       {favoriteSongs.includes(song) ? (
                         <Favorite style={{ color: "red" }} />
                       ) : (

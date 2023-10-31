@@ -40,7 +40,7 @@ function Navbar() {
             <button className="prevbtn" onClick={handlePrev}>
               <svg
                 width="32"
-                height="28"
+                height="31"
                 viewBox="0 0 32 28"
                 rotate={180}
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ function Navbar() {
                 </div>
               </>
             ) : (
-              <div>No song selected</div>
+              <div></div>
             )}
             {/* </div>          */}
             <div className="appleicon">
