@@ -58,7 +58,7 @@
 
 /* Style for the song title */
 .song-title {
-  font-weight: bold; /* Make the title bold */
+  font-weight: semi-bold; /* Make the title bold */
   color: black;
 }
 

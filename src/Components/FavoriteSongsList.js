@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import './FavoriteSongsList.css'
 const FavoriteSongsList = () => {
   const [favorites, setFavorites] = useState([]);
   // const [token, setToken] = useState('');
@@ -45,7 +45,7 @@ const FavoriteSongsList = () => {
   console.log("favi", favorites);
   return (
     <div>
-      <h2>Liked Songs</h2>
+      <h2 className="liked-song">Liked Songs</h2>
       {favorites?.songs?.map((song) => (
         <div key={song.id}>
           <p>{song.title}</p>

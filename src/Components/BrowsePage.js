@@ -4,11 +4,13 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause"; // Import PauseIcon
 import { Card, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 import RandomAlbumGrid from "./RandomAlbumGrid";
 
 function BrowsePage() {
   const [albums, setAlbums] = useState([]);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
   const [expandedSections, setExpandedSections] = useState({});
   const [isPlaying, setIsPlaying] = useState(false); // Add isPlaying state
 
@@ -22,8 +24,12 @@ function BrowsePage() {
       .then((res) => {
         console.log("API Data:", res);
         setAlbums(res.data);
+        setIsLoading(false); // Set isLoading to false when data is fetched
       })
-      .catch((error) => console.error("Error fetching album data:", error));
+      .catch((error) => {
+        console.error("Error fetching album data:", error);
+        setIsLoading(false); // Set isLoading to false in case of an error
+      });
   }, []);
 
   useEffect(() => {
@@ -212,7 +218,14 @@ function BrowsePage() {
   return (
     <div className="screen-container">
       <h1>Browse Albums</h1>
-      {albums && albums.length > 0 && <div>{renderAlbumSections()}</div>}
+      {isLoading ? (
+        <div className="loading-container">
+          <CircularProgress />
+          <p>Loading...</p>
+        </div>
+      ) : (
+        albums && albums.length > 0 && <div>{renderAlbumSections()}</div>
+      )}
     </div>
   );
 }
