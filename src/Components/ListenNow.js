@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const ListenNow = () => {
   const buttonStyle = {
     backgroundColor: "Red",
@@ -29,7 +29,9 @@ const ListenNow = () => {
         </p>
         $10.99/month.
       </p>
-      <button style={buttonStyle}>Try It Free</button>
+      <Link to="/tryItFree">
+        <button style={buttonStyle}>Try It Free</button>
+      </Link>
       <p style={{ ...linkStyle, textAlign: "center" }}>
         <a href="#">Learn More</a>
       </p>

@@ -12,7 +12,9 @@ const Signup = () => {
   const handleNameChange = (event) => {
     setName(event.target.value);
   }
-
+  const handleClose = () => {
+    navigate('/'); 
+  };
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   }
@@ -74,13 +76,34 @@ const Signup = () => {
       marginTop: '53px',
       position: 'fixed',
       zIndex: 1000,
-      background: '#1d1c1c',
+      background: 'rgb(255, 255, 255)',
+      color:"rgb(29, 29, 31)",
+      border: '1px solid black',
       top: '40%',
       left: '50%',
       borderRadius: '10px',
       transform: 'translate(-50%, -50%)',
       overflow: 'auto',
     }}>
+     <button
+        onClick={handleClose}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '30px',
+          border: 'none',
+          fontSize: '20px',
+          cursor: 'pointer',
+          padding: '5px',
+          color: 'black',
+          transition:'background .1s linear',
+          backgroundColor: 'lightgray',
+          borderRadius: '50%', 
+          zIndex: 1,
+        }}
+      >
+        X 
+      </button>
       <h1 style={{ marginBottom: '20px' }}>Create an Account</h1>
       <label style={{ marginBottom: '20px' }}>
         <input type="text" name="name" value={name} onChange={handleNameChange} placeholder="Full Name"

@@ -1,60 +1,26 @@
-.maindiv{
-  background-color: white;
-  background: white;
-}
-.signInBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 200px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  /* background-color: red; */
-  max-width: 300px;
-  margin: 0 auto;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+.gdpr-panes__icon {
+  width: 30px;
+  fill: #fa233b;
+  content: url("https://music.apple.com/static-commerce/img/privacy.cdd37a86.svg");
+  height: 30px;
+
 }
 
-
-.heading {
-  font-size: 10px;
-  margin-bottom: 10px;
-  background-color: white;
+.gdpr-panes__text--account {
+  margin-top: 0.75rem;
+  margin-left: 85px;
+  margin-right: 85px;
+  margin-bottom: 20px;
+}
+.gdpr-panes__text {
+  color: #86868b;
+}
+.typography-caption {
+  font-size: 12px;
+  line-height: 1.3333733333;
+  font-weight: 400;
+  letter-spacing: -.01em;
+  font-family: SF Pro Text,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
-/* .signinForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
 
-/* .signinInput {
-  margin: 5px 0;
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-} */
-
-/* .signinButton {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  margin: 10px;
-  border: none;
-  cursor: pointer;
-} */
-
-/* .signinButton:hover {
-  background-color: #0056b3;
-} */
-
-
-
-/* .signinButton[type="button"] {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: red;
-  text-decoration: underline;
-} */

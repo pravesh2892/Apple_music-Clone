@@ -46,6 +46,7 @@ function Navbar() {
                 height="31"
                 viewBox="0 0 32 28"
                 rotate={180}
+                transform="translate(-10)"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -76,6 +77,7 @@ function Navbar() {
                 width="32"
                 height="28"
                 viewBox="0 0 32 28"
+                transform="translate(-30)"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
@@ -97,12 +99,13 @@ function Navbar() {
                   }
                 >
                   <Link to="/music-player">
-                    <button className="song-icon-button">
+                    <button className="song-icon-button" >
                       <img
                         src={currentSong.thumbnail}
                         alt={currentSong.title}
-                        width="32"
-                        height="32"
+                        width="42"
+                        height="43"
+                        style={{ marginLeft: '-20px', marginTop: '-10px', borderRadius: '5px' }}
                       />
                     </button>
                   </Link>

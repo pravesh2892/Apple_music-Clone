@@ -14,6 +14,7 @@ import Radio from "./Radio/Radio.js";
 import ChangePassword from "./ChangePassword/ChangePassword.js";
 import Signup from "./Signup/Signup.js";
 import LogOut from "./LogOut/LogOut.js";
+import TryItFree from "./tryItFree/TryItFree.js";
 
 export default function App() {
   const [token, setToken] = useState(null);
@@ -34,10 +35,11 @@ export default function App() {
             <Route path="/random-albums" element={<RandomAlbumGrid />} />
             {/* Add a new route for AlbumFetcher with a section number */}
             <Route path="/favorites" element={<FavoriteSongsList />} />
-            <Route path="Radio" element={<Radio />}/>
+            <Route path="Radio" element={<Radio />} />
             <Route path="/change-password" element={<ChangePassword />} />
-              <Route path="/signUp" element={<Signup />} />
-               <Route path="/LogOut" element={<LogOut />} />
+            <Route path="/signUp" element={<Signup />} />
+            <Route path="/LogOut" element={<LogOut />} />
+            <Route path="/tryItFree" element={<TryItFree />} />
           </Routes>
         </div>
       </Router>
