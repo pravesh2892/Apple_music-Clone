@@ -73,7 +73,7 @@ animation: scrollText 5s linear infinite;
 }
 
 .album-card {
-  margin-right: 10px; 
+  margin-right: 5px; 
   font-size: small;
 }
 
@@ -98,7 +98,7 @@ animation: scrollText 5s linear infinite;
 }
 
 .album-card.custom-card {
-  background-color: #80808012;
+  background-color: #d6cdcd12;
 }
 
 .section-1 {
@@ -115,7 +115,7 @@ border-radius: 5px;
 }
 
 .section-1 .album-card{
-max-width: 650px;
+max-width: 410px;
 margin-right: 10px; 
 }
 
@@ -158,7 +158,7 @@ border-radius :5px ;
 .section-7 .album-card, .section-8 .album-card,
 .section-9 .album-card, .section-10 .album-card,
 .section-11 .album-card, .section-12 .album-card{
-max-width :250px ;
+max-width :200px ;
 margin-right :10px ;
 }
 
@@ -171,14 +171,14 @@ white-space :nowrap ;
 
 
 .section-6 .album-image{
-width :250px ;
-height :250px ;
+width :200px ;
+height :200px ;
 }
 
 
 .section-6 .album-card{
-width :350px ;
-height :350px ;
+width :200px ;
+height :280px ;
 }
 
 
