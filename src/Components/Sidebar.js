@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -10,7 +10,7 @@ function Sidebar() {
   const [searchResults, setSearchResults] = useState([]);
   const [showSongList, setShowSongList] = useState(false);
   const [activeLink, setActiveLink] = useState("");
-  
+  const searchResultsRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,23 +22,36 @@ function Sidebar() {
 
   const handleSearch = () => {
     console.log("Search Term:", searchTerm);
-    fetch(
-      `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${searchTerm}"}`,
-      {
-        headers: {
-          projectId: "f104bi07c490",
-        },
+    fetch(`https://academics.newtonschool.co/api/v1/music/song?search={"title":"${searchTerm}"}`, {
+      headers: {
+        'projectId': 'f104bi07c490'
       }
-    )
+    })
       .then((response) => response.json())
       .then((res) => {
-        console.log("API Data:", res);
+        console.log('API Data:', res); 
         setSearchResults(res.data);
         setShowSongList(true);
+        
       })
-      .catch((error) => console.error("Error fetching song data:", error));
-    setShowSongList(false);
+      .catch((error) => console.error('Error fetching song data:', error));
+      setShowSongList(false);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchResultsRef.current && !searchResultsRef.current.contains(event.target)) {
+        // Click occurred outside the search results container
+        setShowSongList(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside); // Cleanup the event listener
+    };
+  }, []);
 
   return (
     <>
@@ -70,23 +83,27 @@ function Sidebar() {
 
               <input
                 type="text"
-                autoComplete="off"
-                autoFocus="off"
+                autoComplete="on"
+                autoFocus="on"
                 placeholder="Search"
                 // ref={inputRef}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if (e.key === 'Enter') {
                     e.preventDefault();
                     console.log("Enter key pressed"); // Log when Enter key is pressed
                     handleSearch();
                   }
                 }}
+                style={{ backgroundColor: 'white' }} 
               />
             </form>
-            {/* <SongsList searchResults={searchResults} /> */}
-            {showSongList && <SongsList searchResults={searchResults} />}
+            {showSongList && (
+              <div ref={searchResultsRef} className="song-list-overlay">
+                <SongsList searchResults={searchResults} />
+              </div>
+            )}
             <div className="sidebardetails">
               <div className="details ">
                 <svg

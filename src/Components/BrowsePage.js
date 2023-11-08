@@ -10,7 +10,7 @@ import RandomAlbumGrid from "./RandomAlbumGrid";
 function BrowsePage() {
   const [albums, setAlbums] = useState([]);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(true);
   const [expandedSections, setExpandedSections] = useState({});
   const [isPlaying, setIsPlaying] = useState(false); // Add isPlaying state
 
@@ -135,6 +135,10 @@ function BrowsePage() {
                           variant="h5"
                           component="div"
                           className="album-title"
+                          style={{
+                            fontSize: "13px",
+                            fontFamily: "Arial, sans-serif",
+                          }}
                         >
                           {album.title}
                         </Typography>
@@ -144,6 +148,10 @@ function BrowsePage() {
                           variant="body2"
                           color="textSecondary"
                           className="song-title"
+                          style={{
+                            fontSize: "16px",
+                            fontFamily: "Arial, sans-serif",
+                          }}
                         >
                           {album.artists[0].name}
                         </Typography>
@@ -191,6 +199,10 @@ function BrowsePage() {
                           variant="h5"
                           component="div"
                           className="album-title"
+                          style={{
+                            fontSize: "16px",
+                            fontFamily: "Arial, sans-serif",
+                          }}
                         >
                           {album.title}
                         </Typography>
@@ -217,7 +229,15 @@ function BrowsePage() {
 
   return (
     <div className="screen-container">
-      <h1>Browse Albums</h1>
+      <h1
+        style={{
+          fontSize: "30px",
+          fontFamily: "Arial, sans-serif",
+          borderBottom: "1px solid white",
+        }}
+      >
+        Browse
+      </h1>
       {isLoading ? (
         <div className="loading-container">
           <CircularProgress />
@@ -229,4 +249,5 @@ function BrowsePage() {
     </div>
   );
 }
+
 export default BrowsePage;

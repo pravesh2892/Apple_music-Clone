@@ -27,6 +27,7 @@ import { addSongToFavorites, removeSongFromFavorites } from "./authenticate";
 function SongList() {
   const { state } = useLocation();
   const album = state && state.album;
+  const { playSong } = useMusicPlayer();
   const { setCurrentSong } = useMusicPlayer();
   const [isPlaying, setIsPlaying] = useState(
     Array(album.songs.length).fill(false)
@@ -39,6 +40,23 @@ function SongList() {
   );
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const playSongFromAlbum = (song) => {
+    // Get the index of the current song in the album
+    const songIndex = album.songs.findIndex((s) => s === song);
+
+    // Create a new array of songs starting from the current song
+    const songsToPlay = [
+      ...album.songs.slice(songIndex),
+      ...album.songs.slice(0, songIndex),
+    ];
+
+    // Log the new array of songs
+    console.log("Songs to play:", songsToPlay);
+
+    // Pass the new array of songs to the playSong function
+    playSong(song, songsToPlay);
+  };
 
   // Function to toggle play/pause for a song
   const togglePlay = (index) => {
@@ -130,7 +148,7 @@ function SongList() {
           display: "flex",
           alignItems: "center",
           marginBottom: "20px",
-          backgroundColor: "#0000001a",
+          backgroundColor: "transparent",
         }}
       >
         <CardMedia
@@ -172,7 +190,10 @@ function SongList() {
         Songs in {album.title}
       </Typography>
       {album.songs && album.songs.length > 0 && (
-        <TableContainer component={Card} style={{ backgroundColor: "#fff" }}>
+        <TableContainer
+          component={Card}
+          style={{ backgroundColor: "transparent" }}
+        >
           <Table className="table">
             <TableHead>
               <TableRow>
@@ -191,17 +212,31 @@ function SongList() {
                   }}
                   className="table-row"
                 >
-                  <TableCell className="table-cell">
+                  <TableCell className="table-cell" style={{color:"black"}}>
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <img
-                        src={song.thumbnail}
-                        alt={song.title}
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          marginRight: "10px",
-                        }}
-                      />
+                      <div style={{ position: "relative" }}>
+                        <img
+                          src={song.thumbnail}
+                          alt={song.title}
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                            marginRight: "10px",
+                          }}
+                        />
+                        <IconButton
+                          className="play-pause-button"
+                          onClick={() => playSongFromAlbum(song)}
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        >
+                          {isPlaying[index] ? <Pause /> : <PlayArrow />}
+                        </IconButton>
+                      </div>
                       <div style={{ color: "black" }}>{song.title}</div>
                     </div>
                   </TableCell>
@@ -214,10 +249,10 @@ function SongList() {
                     {album.title}
                   </TableCell>
                   <TableCell>
-                    <IconButton onClick={() => togglePlay(index)} style={{ color: "black" }}>
-                      {isPlaying[index] ? <Pause /> : <PlayArrow />}
-                    </IconButton>
-                    <IconButton onClick={() => toggleFavorite(song)} style={{ color: "red" }}>
+                    {/* <IconButton onClick={() => togglePlay(index)}>
+                    {isPlaying[index] ? <Pause /> : <PlayArrow />}
+                  </IconButton> */}
+                    <IconButton onClick={() => toggleFavorite(song)}>
                       {favoriteSongs.includes(song) ? (
                         <Favorite style={{ color: "red" }} />
                       ) : (

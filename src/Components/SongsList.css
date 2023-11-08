@@ -1,4 +1,4 @@
-/* .song-list-overlay {
+ .song-list-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,23 +24,22 @@
     border-bottom: 1px solid #ccc; 
   }
   
-   */
+ 
 
 /* Add these styles to your CSS file */
 
 /* Style for the SongList container */
 .songs-list {
-  position: absolute; /* Position absolutely to place it over other content */
-  top: 95px; /* Adjust the top value as needed to position it below the search bar */
-  left: 28px; /* Adjust the left value as needed */
+  position: absolute; 
+  top: 95px; 
+  left: 3px;
   right: 0;
   bottom: 50px;
-  /* background-color: #1d1c1c;  */
-  border: 1px solid rgba(0, 0, 0, 0.15); /* Border style */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Box shadow */
-  background-color: rgba(94, 87, 87, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.15); 
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+  background-color: rgba(224, 217, 217, 0.7);
   backdrop-filter: blur(8px);
-  overflow-y: auto; /* Enable vertical scroll if needed */
+  overflow-y: auto; 
 }
 
 /* Style for the SongList items */
