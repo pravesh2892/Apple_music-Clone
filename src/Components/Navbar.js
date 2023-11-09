@@ -21,7 +21,6 @@ import {
 
 function Navbar() {
   const { setCurrentSong } = useMusicPlayer();
-  const [ setIsPlaying] = useState(false);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isLooping, setIsLooping] = useState(false);
   const [isShuffling, setIsShuffling] = useState(false);
@@ -37,14 +36,11 @@ function Navbar() {
 
   const handleSongIconClick = (album, songIndex) => {
     setCurrentSongIndex(songIndex);
-    setIsPlaying(true);
   };
 
   const songs = ["Song 1", "Song 2", "Song 3"];
 
-  // function handlePlayPause() {
-  //   setIsPlaying(!isPlaying);
-  // }
+ 
  
 
 

@@ -53,16 +53,12 @@ const SignIn = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Assuming the API response contains a 'token' field
+  
         console.log("my data", data);
         const token = data.token;
-
-        // Check if the response contains a token
         if (token) {
           // Store the token in local storage
           localStorage.setItem("token", token);
-
-          // Hide the email form and show the rest of the form or perform any other action
           setShowEmailForm(false);
           navigate("/browse");
         } else {
