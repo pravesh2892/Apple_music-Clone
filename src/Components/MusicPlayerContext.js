@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 const MusicPlayerContext = createContext();
 
@@ -7,6 +7,20 @@ export function MusicPlayerProvider({ children }) {
   const [playlist, setPlaylist] = useState([]);
   const [indexSong, setIndexSong] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+
+  const audioRef = useRef(new Audio());
+
+  useEffect(() => {
+    if (currentSong) {
+      audioRef.current.src = currentSong.audio_url;
+      if (isPlaying) {
+        audioRef.current.play();
+      }
+    } else {
+      audioRef.current.pause();
+    }
+  }, [currentSong, isPlaying]);
 
   const playSong = (song, songList) => {
     console.log('Playing song:', song);
