@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMusicPlayer } from "./MusicPlayerContext";
 import "./Navbar.css";
@@ -22,8 +22,9 @@ import {
 function Navbar() {
   const { setCurrentSong } = useMusicPlayer();
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
-  const [isLooping, setIsLooping] = useState(false);
-  const [isShuffling, setIsShuffling] = useState(false);
+  const audioRef = useRef();
+  const [currentTime, setCurrentTime] = useState(0);
+  const durationLimit = 20;
   const {
     currentSong,
     isPlaying,
@@ -34,15 +35,44 @@ function Navbar() {
     playSong,
   } = useMusicPlayer();
 
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    const updateProgress = () => {
+      const current = audio.currentTime;
+      setCurrentTime(Math.floor(current)); // Set currentTime to integer seconds
+    };
+
+    const setInitialData = () => {
+      audio.addEventListener("timeupdate", updateProgress);
+    };
+
+    if (currentSong) {
+      audio.src = currentSong.audio_url;
+      if (isPlaying) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      setInitialData();
+    }
+
+    return () => {
+      if (audio) {
+        audio.removeEventListener("timeupdate", updateProgress);
+      }
+    };
+  }, [currentSong, isPlaying]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   const handleSongIconClick = (album, songIndex) => {
     setCurrentSongIndex(songIndex);
   };
-
-  const songs = ["Song 1", "Song 2", "Song 3"];
-
- 
- 
-
 
   return (
     <>
@@ -82,7 +112,7 @@ function Navbar() {
                     fill-rule="nonzero"
                   ></path>
                 </svg>
-              ) :(
+              ) : (
                 <svg
                   width="32"
                   height="28"
@@ -149,8 +179,19 @@ function Navbar() {
                         currentSong.artist.name}
                     </span>
                   </div>
+               
+                <div className="audio-bar">
+                  <div>
+                    <span>{formatTime(currentTime)}</span>
+                    {/* <span>/</span>
+                    <span>{formatTime(durationLimit)}</span> */}
+                    <progress value={currentTime} max={durationLimit} />
+                  </div>
+                  <audio ref={audioRef} />
+                </div>
                 </div>
                 <div class="lcd__badge-platter">PREVIEW</div>
+                
               </>
             ) : (
               <div className="appleicon">
@@ -205,17 +246,17 @@ function Navbar() {
               <input type="range" />
             </div>
             <div className="signdiv">
-            <Link to="/LogOut">
-              <p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-              
-                viewBox="0 0 18 18">
-                <path d="M2.634 5.537a.906.906 0 1 0 0-1.813.906.906 0 1 0 0 1.813zm3.192-.325h9.865a.576.576 0 0 0 .585-.578.578.578 0 0 0-.585-.585H5.826a.574.574 0 0 0-.585.585c0 .325.253.578.585.578zM2.634 9.906c.506 0 .91-.404.91-.91a.906.906 0 0 0-.91-.91.906.906 0 0 0-.91.91c0 .506.405.91.91.91zm3.192-.325h9.865a.582.582 0 1 0 0-1.162H5.826a.572.572 0 0 0-.585.577c0 .325.253.585.585.585zm-3.192 4.694a.91.91 0 1 0-.001-1.82.91.91 0 0 0 0 1.82zm3.192-.332h9.865a.576.576 0 0 0 .585-.577.578.578 0 0 0-.585-.585H5.826a.574.574 0 0 0-.585.585c0 .324.253.577.585.577z"></path>
-              </svg>
-              </p>
+              <Link to="/LogOut">
+                <p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                  >
+                    <path d="M2.634 5.537a.906.906 0 1 0 0-1.813.906.906 0 1 0 0 1.813zm3.192-.325h9.865a.576.576 0 0 0 .585-.578.578.578 0 0 0-.585-.585H5.826a.574.574 0 0 0-.585.585c0 .325.253.578.585.578zM2.634 9.906c.506 0 .91-.404.91-.91a.906.906 0 0 0-.91-.91.906.906 0 0 0-.91.91c0 .506.405.91.91.91zm3.192-.325h9.865a.582.582 0 1 0 0-1.162H5.826a.572.572 0 0 0-.585.577c0 .325.253.585.585.585zm-3.192 4.694a.91.91 0 1 0-.001-1.82.91.91 0 0 0 0 1.82zm3.192-.332h9.865a.576.576 0 0 0 .585-.577.578.578 0 0 0-.585-.585H5.826a.574.574 0 0 0-.585.585c0 .324.253.577.585.577z"></path>
+                  </svg>
+                </p>
               </Link>
               <Link to="/signin">
                 <button>

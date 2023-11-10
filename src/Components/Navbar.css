@@ -1,16 +1,19 @@
   
 
 .song-title-name{
+  position: relative;
   max-width: 100%;
-  height: calc(var(--lcd-height, 44px) - 3px);
+  height: calc(var(--lcd-height, 61px) - 3px);
   display: flex;
   flex-direction: column; 
   flex-grow: 1;
   align-items: var(--lcd-justify-text, center);
   justify-content: center;
   overflow: hidden;
-   position: relative;
+  position: relative;
 }
+
+
 .lcd__badge-platter{
   font-size: 11px;
     line-height: 1.1;
@@ -62,4 +65,16 @@
 
 .dropdown-content a:hover {
   background-color: #f1f1f1;
+}
+
+
+ .audio-bar span{
+ font-size: 10px;
+ color: gray;
+} 
+
+.audio-bar progress {
+  width: 325px; 
+  height: 10px;
+  color: gray;
 }

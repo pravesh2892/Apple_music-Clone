@@ -1,40 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Card, CardContent, CardMedia, IconButton } from '@mui/material';
-import { useLocation } from 'react-router-dom';
-import { PlayArrow, Pause, Favorite, FavoriteBorder } from '@mui/icons-material';
-import { useMusicPlayer } from  './MusicPlayerContext';
-import FavoriteSongs from './FavoriteSongs';
-import './SongList.css';
-import { addSongToFavorites, removeSongFromFavorites } from './authenticate';
+import React, { useState, useEffect } from "react";
+import {
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+} from "@mui/material";
+import { useLocation } from "react-router-dom";
+import {
+  PlayArrow,
+  Pause,
+  Favorite,
+  FavoriteBorder,
+} from "@mui/icons-material";
+import { useMusicPlayer } from "./MusicPlayerContext";
+import FavoriteSongs from "./FavoriteSongs";
+import "./SongList.css";
+import { addSongToFavorites, removeSongFromFavorites } from "./authenticate";
 
 function SongList() {
   const { state } = useLocation();
   const album = state && state.album;
   const { playSong } = useMusicPlayer();
   const { setCurrentSong } = useMusicPlayer();
-  const [isPlaying, setIsPlaying] = useState(Array(album.songs.length).fill(false));
+  const [isPlaying, setIsPlaying] = useState(
+    Array(album.songs.length).fill(false)
+  );
   const [artistNames, setArtistNames] = useState({});
   const [isfavorites, setIsFavorites] = useState(false);
   const [favoriteSongs, setFavoriteSongs] = useState([]);
-  const [audioElements, setAudioElements] = useState(Array(album.songs.length).fill(null));
+  const [audioElements, setAudioElements] = useState(
+    Array(album.songs.length).fill(null)
+  );
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
- 
   const playSongFromAlbum = (song) => {
     // Get the index of the current song in the album
     const songIndex = album.songs.findIndex((s) => s === song);
-  
+
     // Create a new array of songs starting from the current song
-    const songsToPlay = [...album.songs.slice(songIndex), ...album.songs.slice(0, songIndex)];
-  
+    const songsToPlay = [
+      ...album.songs.slice(songIndex),
+      ...album.songs.slice(0, songIndex),
+    ];
+
     // Log the new array of songs
-    console.log('Songs to play:', songsToPlay);
-  
+    console.log("Songs to play:", songsToPlay);
+
     // Pass the new array of songs to the playSong function
     playSong(song, songsToPlay);
   };
-  
 
   // Function to toggle play/pause for a song
   const togglePlay = (index) => {
@@ -59,7 +81,7 @@ function SongList() {
       return newIsPlaying;
     });
   };
-console.log("songlis " , favoriteSongs)
+  console.log("songlis ", favoriteSongs);
   // Function to toggle favorite status for a song
   const toggleFavorite = async (songId) => {
     try {
@@ -79,20 +101,26 @@ console.log("songlis " , favoriteSongs)
     } catch (error) {
       console.error("Error toggling like:", error);
     }
-  }
+  };
   // Function to fetch artist names and store them in the artistNames state
   const fetchArtistNames = async () => {
-    const artistIds = album.songs.reduce((ids, song) => [...ids, ...song.artist], []);
+    const artistIds = album.songs.reduce(
+      (ids, song) => [...ids, ...song.artist],
+      []
+    );
     const uniqueArtistIds = [...new Set(artistIds)];
     const names = {};
 
     await Promise.all(
       uniqueArtistIds.map(async (artistId) => {
-        const response = await fetch(`https://academics.newtonschool.co/api/v1/music/artist/${artistId}`, {
-          headers: {
-            'projectId': 'f104bi07c490'
+        const response = await fetch(
+          `https://academics.newtonschool.co/api/v1/music/artist/${artistId}`,
+          {
+            headers: {
+              projectId: "f104bi07c490",
+            },
           }
-        });
+        );
         const res = await response.json();
         names[artistId] = res.data.name;
       })
@@ -196,20 +224,19 @@ console.log("songlis " , favoriteSongs)
                             marginRight: "10px",
                           }}
                         />
-                       
-                       <IconButton
-            className="play-pause-button"
-            onClick={() => playSongFromAlbum(song)}
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            {isPlaying[index] ? <Pause /> : <PlayArrow />}
-          </IconButton>
-                        
+
+                        <IconButton
+                          className="play-pause-button"
+                          onClick={() => playSongFromAlbum(song)}
+                          style={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                        >
+                          {isPlaying[index] ? <Pause /> : <PlayArrow />}
+                        </IconButton>
                       </div>
                       <div style={{ color: "black" }}>{song.title}</div>
                     </div>
